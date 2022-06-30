@@ -7,22 +7,20 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class ListViewAdapter (val context: Context, val phoneList: ArrayList<PhoneNumber>): BaseAdapter() {
+class GridViewAdapter (val context: Context, val galleryList: ArrayList<GalleryItem>): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.phone_item, null)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.gallery_item, null)
 
-        val name = view.findViewById<TextView>(R.id.nameTv)
-        val phone = view.findViewById<TextView>(R.id.phoneTv)
+        val title = view.findViewById<TextView>(R.id.titleTv)
 
-        val info = phoneList[position]
-        name.text = info.name
-        phone.text = info.phone
+        val info = galleryList[position]
+        title.text = info.title
 
         return view
     }
 
     override fun getItem(position: Int): Any {
-        return phoneList[position]
+        return galleryList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -30,6 +28,6 @@ class ListViewAdapter (val context: Context, val phoneList: ArrayList<PhoneNumbe
     }
 
     override fun getCount(): Int {
-        return phoneList.size
+        return galleryList.size
     }
 }

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.37177121771217714" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1824630737304687" />
+        <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20623376818670744" />
+        <entry key="app/src/main/res/layout/frag_gallery.xml" value="0.13134057971014493" />
+        <entry key="app/src/main/res/layout/frag_phone.xml" value="0.13134057971014493" />
+        <entry key="app/src/main/res/layout/gallery_item.xml" value="0.528264407835145" />
+        <entry key="app/src/main/res/layout/phone_item.xml" value="0.18971631205673758" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
