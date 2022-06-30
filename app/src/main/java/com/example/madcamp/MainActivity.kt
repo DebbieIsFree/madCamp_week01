@@ -2,7 +2,6 @@ package com.example.madcamp
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 
 

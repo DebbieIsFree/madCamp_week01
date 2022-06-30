@@ -1,4 +1,8 @@
 package com.example.madcamp
 
-class GalleryItem(val title: String) {
-}
+import android.graphics.drawable.Drawable
+
+data class GalleryItem(
+    val img: Drawable,
+    val title: String
+)
