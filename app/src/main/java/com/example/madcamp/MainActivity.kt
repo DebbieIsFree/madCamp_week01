@@ -1,10 +1,10 @@
 package com.example.madcamp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import org.json.JSONArray
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         phoneBtn.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, PhoneFragment())
+                .addToBackStack(null)
                 .commit()
         }
         galleryBtn.setOnClickListener {

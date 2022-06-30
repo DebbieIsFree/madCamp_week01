@@ -10,4 +10,11 @@
         android:layout_height="wrap_content"
         android:text="phone"
         android:textSize="30sp" />
+
+    <ListView
+        android:id="@+id/phoneListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
 </LinearLayout>

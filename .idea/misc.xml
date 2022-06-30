@@ -3,13 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.37177121771217714" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1824630737304687" />
-        <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20623376818670744" />
-        <entry key="app/src/main/res/layout/frag_gallery.xml" value="0.13134057971014493" />
-        <entry key="app/src/main/res/layout/frag_phone.xml" value="0.13134057971014493" />
-        <entry key="app/src/main/res/layout/gallery_item.xml" value="0.528264407835145" />
-        <entry key="app/src/main/res/layout/phone_item.xml" value="0.18971631205673758" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1415" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1415" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/activity_listviewitem.xml" value="0.13958333333333334" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/activity_phone.xml" value="0.18" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/frag_phone.xml" value="0.15136226034308778" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/toolbar.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/xml/network_security_config.xml" value="0.1" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/xml/toolbar.xml" value="0.137109375" />
       </map>
     </option>
   </component>
