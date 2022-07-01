@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val phoneBtn = findViewById<Button>(R.id.phone)
         val galleryBtn = findViewById<Button>(R.id.gallery)
+        val mapBtn = findViewById<Button>(R.id.map)
 
         phoneBtn.setOnClickListener {
             supportFragmentManager.beginTransaction()
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         galleryBtn.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, GalleryFragment())
+                .commit()
+        }
+        mapBtn.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frame, MapViewFragment())
                 .commit()
         }
     }

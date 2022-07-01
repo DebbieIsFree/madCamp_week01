@@ -40,10 +40,10 @@
             android:text="갤러리" />
 
         <Button
-            android:id="@+id/random"
+            android:id="@+id/map"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:text="자유 주제" />
+            android:text="지도" />
     </LinearLayout>
 
 </LinearLayout>
