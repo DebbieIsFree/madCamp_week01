@@ -14,6 +14,13 @@ import com.naver.maps.map.OnMapReadyCallback
 class MapViewFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mapView: MapView
 
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        NaverMapSdk.getInstance(this).client =
+//            NaverMapSdk.NaverCloudPlatformClient("zsmhzox1fe")
+//    }
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.frag_map, container, false)
     }
