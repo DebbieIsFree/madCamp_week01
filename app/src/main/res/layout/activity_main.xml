@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    android:padding="20dp"
+    android:orientation="vertical"
+    android:padding="0dp"
     tools:context=".MainActivity">
+
+
+    <!--        <Button-->
+    <!--            android:id="@+id/phone"-->
+    <!--            android:layout_width="100sp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="연락처" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/gallery"-->
+    <!--            android:layout_width="100sp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="갤러리" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/map"-->
+    <!--            android:layout_width="100sp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="지도" />-->
+    <!--    </com.google.android.material.tabs.TabLayout>-->
 
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabGravity="fill"/>
-<!--        <Button-->
-<!--            android:id="@+id/phone"-->
-<!--            android:layout_width="100sp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="연락처" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/gallery"-->
-<!--            android:layout_width="100sp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="갤러리" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/map"-->
-<!--            android:layout_width="100sp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="지도" />-->
-<!--    </com.google.android.material.tabs.TabLayout>-->
-
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
 
     <FrameLayout
-        android:layout_marginTop="30dp"
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="30dp"
+        android:layout_weight="1" />
 
 
 </LinearLayout>

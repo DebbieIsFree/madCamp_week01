@@ -1,3 +1,5 @@
 package com.example.madcamp
 
-class PhoneNumber (val name: String, val phone: String)
+import android.graphics.drawable.Drawable
+
+class PhoneNumber (val img: Drawable, val name: String, val phone: String)

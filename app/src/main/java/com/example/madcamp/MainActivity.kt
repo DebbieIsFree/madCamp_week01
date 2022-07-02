@@ -1,7 +1,11 @@
 package com.example.madcamp
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.gms.location.LocationRequest
@@ -11,41 +15,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val phoneBtn = findViewById<Button>(R.id.phone)
-//        val galleryBtn = findViewById<Button>(R.id.gallery)
-//        val mapBtn = findViewById<Button>(R.id.map)
 
-//        phoneBtn.setOnClickListener {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.frame, PhoneFragment())
-//                .addToBackStack(null)
-//                .commit()
-//        }
-//        galleryBtn.setOnClickListener {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.frame, GalleryFragment())
-//                .commit()
-//        }
-//        mapBtn.setOnClickListener {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.frame, MapViewFragment())
-//                .commit()
-//        }
-
-
-
-
-        /////
-
+        val grantResults = intArrayOf(0)
+        checkPermission()
 
         var fragment1 = PhoneFragment()
         var fragment2 = GalleryFragment()
         var fragment3 = MapViewFragment()
 
         val  tabs = findViewById<TabLayout>(R.id.tabs)
-        tabs.addTab(tabs.newTab().setText("친구"))
-        tabs.addTab(tabs.newTab().setText("채팅"))
-        tabs.addTab(tabs.newTab().setText("더보기"))
+        tabs.addTab(tabs.newTab().setText("Phone"))
+        tabs.addTab(tabs.newTab().setText("Gallery"))
+        tabs.addTab(tabs.newTab().setText("Map"))
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment1).commit()
 
@@ -71,5 +52,29 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun checkPermission() {
+        val contactPermission = ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS")
+
+        if(contactPermission == PackageManager.PERMISSION_GRANTED) {
+
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf<String>("android.permission.READ_CONTACTS"), 100)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d("test", "permission granted")
+        } else {
+            Log.d("test", "permission denied")
+        }
     }
 }

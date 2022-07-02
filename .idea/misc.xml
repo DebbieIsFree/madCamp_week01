@@ -3,19 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/drawable/navigation.xml" value="0.135" />
-        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/frag_gallery.xml" value="0.1606962663975782" />
-        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/frag_map.xml" value="0.146875" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.37177121771217714" />
         <entry key="app/src/main/res/layout/activity_listviewitem.xml" value="0.13134057971014493" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13071594238281248" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20623376818670744" />
         <entry key="app/src/main/res/layout/frag_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/frag_map.xml" value="0.13134057971014493" />
-        <entry key="app/src/main/res/layout/frag_phone.xml" value="0.13134057971014493" />
+        <entry key="app/src/main/res/layout/frag_phone.xml" value="0.2431060791015625" />
         <entry key="app/src/main/res/layout/gallery_item.xml" value="0.21181945800781252" />
-        <entry key="app/src/main/res/layout/phone_item.xml" value="0.18971631205673758" />
+        <entry key="app/src/main/res/layout/phone_item.xml" value="0.402191162109375" />
       </map>
     </option>
   </component>

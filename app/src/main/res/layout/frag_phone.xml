@@ -4,17 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+    <SearchView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Phone"
-        android:textSize="30sp" />
+        android:layout_height="96dp"
+        android:layout_weight="1"
+        android:queryBackground="@color/white" />
 
     <ListView
         android:id="@+id/phoneListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+    </ListView>
 
 </LinearLayout>

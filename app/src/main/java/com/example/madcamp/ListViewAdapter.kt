@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 
 class ListViewAdapter (val context: Context, val phoneList: ArrayList<PhoneNumber>): BaseAdapter() {
@@ -13,8 +14,10 @@ class ListViewAdapter (val context: Context, val phoneList: ArrayList<PhoneNumbe
 
         val name = view.findViewById<TextView>(R.id.nameTv)
         val phone = view.findViewById<TextView>(R.id.phoneTv)
+        val image = view.findViewById<ImageView>(R.id.profileImage)
 
         val info = phoneList[position]
+        image.setImageDrawable(info.img)
         name.text = info.name
         phone.text = info.phone
 
