@@ -1,35 +1,63 @@
 package com.example.madcamp
 
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
+
+import android.content.Context
+import android.content.Context.LOCATION_SERVICE
+import android.graphics.Camera
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.MainThread
 import androidx.annotation.Nullable
 import androidx.annotation.UiThread
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.CameraUpdateFactory.newLatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Align
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.util.FusedLocationSource
+import java.util.jar.Manifest
+
+
+private lateinit var mapView: MapView
+lateinit var mcontext: Context
+
 
 class MapViewFragment : Fragment(), OnMapReadyCallback {
-    private lateinit var mapView: MapView
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        NaverMapSdk.getInstance(this).client =
-//            NaverMapSdk.NaverCloudPlatformClient("zsmhzox1fe")
-//    }
+    val LOCATION_PERMISSION_REQUEST_CODE = 1000
+    private lateinit var locationSource: FusedLocationSource
+    private lateinit var naverMap: NaverMap
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        mcontext = context as MainActivity
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        locationSource =
+            FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return inflater.inflate(R.layout.frag_map, container, false)
     }
 
@@ -37,6 +65,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         mapView = view.findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
+        mapView.onResume()
+        mapView.getMapAsync(this)
+
     }
 
     override fun onStart() {
@@ -64,8 +95,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         mapView.onStop()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         mapView.onDestroy()
     }
 
@@ -74,116 +105,50 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         mapView.onLowMemory()
     }
 
-    @UiThread
-    override fun onMapReady(naverMap: NaverMap) {
-        // ...
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mapView.onDestroy()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions,
+                grantResults
+            )
+        ) {
+            if (!locationSource.isActivated) { // 권한 거부됨
+                naverMap.locationTrackingMode = LocationTrackingMode.None
+            }
+            return
+        }
     }
 
 
+    override fun onMapReady(naverMap: NaverMap) {
+        this.naverMap = naverMap
+        naverMap.locationSource = locationSource
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-
-
-
-    /////
-
-//    private lateinit var fusedLocationClient: FusedLocationProviderClient
-//    val permission_request = 99
-//    private lateinit var naverMap: NaverMap
-//    var permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-//    //권한 가져오기
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        //activity가 최초 실행 되면 이곳을 수행
-//
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.frag_map)
-//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//
-//        if (isPermitted()) {
-//            startProcess()
-//        } else {
-//            ActivityCompat.requestPermissions(this, permissions, permission_request)
-//        }//권한 확인
-//    }
-//
-//    fun isPermitted(): Boolean {
-//        for (perm in permissions) {
-//            if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED) {
-//                return false
-//            }
-//        }
-//        return true
-//    }//권한을 허락 받아야함
-//
-//    fun startProcess(){
-//        val fm = supportFragmentManager
-//        val mapFragment = fm.findFragmentById(R.id.map_view) as MapFragment?
-//            ?: MapFragment.newInstance().also {
-//                fm.beginTransaction().add(R.id.map_view, it).commit()
-//            } //권한
-//        mapFragment.getMapAsync(this)
-//    } //권한이 있다면 onMapReady연결
-//
-//
-//    @UiThread
-//    override fun onMapReady(naverMap: NaverMap){
-//
-//        val cameraPosition = CameraPosition(
-//            LatLng(37.5666102, 126.9783881),  // 위치 지정
-//            16.0 // 줌 레벨
-//        )
-//        naverMap.cameraPosition = cameraPosition
-//        this.naverMap = naverMap
-//
-//        fusedLocationProviderClient =
-//            LocationServices.getFusedLocationProviderClient(this) //gps 자동으로 받아오기
-//        setUpdateLocationListner() //내위치를 가져오는 코드
-//    }
-//
-//    //내 위치를 가져오는 코드
-//    lateinit var fusedLocationProviderClient: FusedLocationProviderClient //자동으로 gps값을 받아온다.
-//    lateinit var locationCallback: LocationCallback //gps응답 값을 가져온다.
-//
-//    @SuppressLint("MissingPermission")
-//    fun setUpdateLocationListner() {
-//        val locationRequest = LocationRequest.create()
-//        locationRequest.run {
-//            var priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도
-//            var interval = 1000 //1초에 한번씩 GPS 요청
-//        }
-//
-//        locationCallback = object : LocationCallback() {
-//            override fun onLocationResult(locationResult: LocationResult?) {
-//                locationResult ?: return
-//                for ((i, location) in locationResult.locations.withIndex()) {
-//                    Log.d("location: ", "${location.latitude}, ${location.longitude}")
-//                    setLastLocation(location)
-//                }
-//            }
-//        }
-//        //location 요청 함수 호출 (locationRequest, locationCallback)
-//
-//        fusedLocationProviderClient.requestLocationUpdates(
-//            locationRequest,
-//            locationCallback,
-//            Looper.myLooper()
-//        )
-//    }//좌표계를 주기적으로 갱신
-//
-//    fun setLastLocation(location: Location) {
-//        val myLocation = LatLng(location.latitude, location.longitude)
-//        val marker = Marker()
-//        marker.position = myLocation
-//
-//        marker.map = naverMap
-//        //마커
-//        val cameraUpdate = CameraUpdate.scrollTo(myLocation)
-//        naverMap.moveCamera(cameraUpdate)
-//        naverMap.maxZoom = 18.0
-//        naverMap.minZoom = 5.0
-//
-//        //marker.map = null
-//    }
-
+        naverMap.addOnLocationChangeListener { location ->
+//            Toast.makeText(this, "${location.latitude}, ${location.longitude}",
+//                Toast.LENGTH_SHORT).show()
+            Log.d("Success : ", "SUCCESS")
+            Log.d("loc : ", "${location.latitude}, ${location.longitude}")
+        }
+    }
 
 }
+
+
+
+
+
+
