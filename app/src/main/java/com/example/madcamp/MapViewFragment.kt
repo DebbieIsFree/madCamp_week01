@@ -13,9 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.Nullable
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 import java.util.*
@@ -48,54 +53,55 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
 //        Manifest.permission.ACCESS_COARSE_LOCATION
 //    )
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        mcontext = context as MainActivity
-//    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mcontext = context as MainActivity
+    }
 //
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        fusedLocationClient =
-//            LocationServices.getFusedLocationProviderClient(requireContext())
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+
+        locationSource =
+            FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+
+        locationManager = mcontext.getSystemService(LOCATION_SERVICE) as LocationManager
+
+        if (ActivityCompat.checkSelfPermission(
+                mcontext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                mcontext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
 //
-//        locationSource =
-//            FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-//
-//        locationManager = mcontext.getSystemService(LOCATION_SERVICE) as LocationManager
-//
-//        if (ActivityCompat.checkSelfPermission(
-//                mcontext,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                mcontext,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//            return
-//        }
-//
-//        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, object : CancellationToken() {
-//            override fun onCanceledRequested(p0: OnTokenCanceledListener) = CancellationTokenSource().token
-//
-//            override fun isCancellationRequested() = false
-//        })
-//            .addOnSuccessListener { location: Location? ->
-//                if (location == null)
-//                    Log.d("Failed","Cannot_get_location")
-//                else {
-//                    lat = location.latitude
-//                    lon = location.longitude
-//                    Log.d("location : ", "${lat}, $lon")
-//                }
-//
-//                val geocoder  = Geocoder(mcontext, Locale.KOREA)
-//                var addr = geocoder.getFromLocation(lat, lon, 1)
-//
-//                Log.d("주소", "${addr[0].countryName}")
-//                Log.d("주소", "${addr[0].subLocality}")
-//                Log.d("주소", "${addr[0].subAdminArea}")
-//            }
-//    }
+        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, object : CancellationToken() {
+            override fun onCanceledRequested(p0: OnTokenCanceledListener) = CancellationTokenSource().token
+
+            override fun isCancellationRequested() = false
+        })
+            .addOnSuccessListener { location: Location? ->
+                if (location == null)
+                    Log.d("Failed","Cannot_get_location")
+                else {
+                    lat = location.latitude
+                    lon = location.longitude
+                    Log.d("location : ", "${lat}, $lon")
+                }
+
+                val geocoder  = Geocoder(mcontext, Locale.KOREA)
+                var addr = geocoder.getFromLocation(lat, lon, 1)
+
+                Log.d("나라", "${addr[0].countryName}")
+                Log.d("주소", "${addr[0].subLocality}")
+
+
+            }
+    }
 
 
     override fun onCreateView(
@@ -214,8 +220,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ready", "hihihi")
         this.naverMap = naverMap
-//        naverMap.locationSource = locationSource
-//        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap.locationSource = locationSource
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
     }
 
 }

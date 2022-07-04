@@ -1,5 +1,7 @@
 package com.example.madcamp
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.text.FieldPosition
+
 
 class GalleryFragment: Fragment() {
     override fun onCreateView(
@@ -39,12 +41,22 @@ class GalleryFragment: Fragment() {
         recyclerView.adapter = galleryAdapter
 
         galleryAdapter.setItemClickListener(object: GalleryAdapter.OnItemClickListener {
+            @SuppressLint("ResourceType")
             override fun onClick(v: View, position: Int) {
                 Log.d("test", position.toString())
-                val dialog = GalleryPopup(view.context)
-                dialog.showDialog(list[position])
 
+                var fname  = "item$position"
+
+                var dialog = Dialog(view.context)
+
+
+                dialog.setContentView(R.layout.dialog)
+//                dialog.setTitle(fname)
+                dialog.show()
+//                dialog.showDialog(list[position])
             }
         })
+
     }
+
 }
