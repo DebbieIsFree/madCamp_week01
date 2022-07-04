@@ -57,13 +57,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkPermission() {
-        val contactPermission = ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS")
-
-        if(contactPermission == PackageManager.PERMISSION_GRANTED) {
-
+        val contactPermission1 = ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS")
+        val contactPermission2 = ContextCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION")
+        if(contactPermission1 == PackageManager.PERMISSION_GRANTED) {
         }
         else {
             ActivityCompat.requestPermissions(this, arrayOf<String>("android.permission.READ_CONTACTS"), 100)
+        }
+        if(contactPermission2 == PackageManager.PERMISSION_GRANTED) {
+        }
+        else {
+            ActivityCompat.requestPermissions(this, arrayOf<String>("android.permission.ACCESS_FINE_LOCATION"), 101)
         }
     }
 

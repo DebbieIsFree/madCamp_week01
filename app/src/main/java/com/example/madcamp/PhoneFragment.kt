@@ -31,26 +31,26 @@ class PhoneFragment: Fragment() {
         }
 
         val context = context as MainActivity
-//        val search = context.findViewById(R.id.search) as SearchView
+        val search = context.findViewById(R.id.search) as SearchView
         val lv = context.findViewById(R.id.phoneListView) as ListView
         var adapter = ListViewAdapter(context, totList)
         lv.adapter = adapter
 
-//        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(p0: String): Boolean {
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(p0: String): Boolean {
-//                Log.d("test", p0)
-//                filterList = totList.filter {
-//                    it.name.contains(p0)
-//                } as ArrayList<PhoneNumber>
-//                adapter = ListViewAdapter(context, filterList)
-//                lv.adapter = adapter
-//                return true
-//            }
-//        })
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String): Boolean {
+                Log.d("test", p0)
+                filterList = totList.filter {
+                    it.name.contains(p0)
+                } as ArrayList<PhoneNumber>
+                adapter = ListViewAdapter(context, filterList)
+                lv.adapter = adapter
+                return true
+            }
+        })
 
 
     }
