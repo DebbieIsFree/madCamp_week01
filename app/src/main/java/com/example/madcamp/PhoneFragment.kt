@@ -23,6 +23,7 @@ class PhoneFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var totList = arrayListOf<PhoneNumber>()
+        var filterList = arrayListOf<PhoneNumber>()
         val grant = intArrayOf(0)
         onRequestPermissionsResult(100, arrayOf("android.permission.READ_CONTACTS"), grant)
         if(grant[0] == PackageManager.PERMISSION_GRANTED) {
@@ -32,6 +33,8 @@ class PhoneFragment: Fragment() {
         val context = context as MainActivity
         val search = context.findViewById(R.id.searchView) as SearchView
         val lv = context.findViewById(R.id.phoneListView) as ListView
+        var adapter = ListViewAdapter(context, totList)
+        lv.adapter = adapter
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String): Boolean {
@@ -39,12 +42,17 @@ class PhoneFragment: Fragment() {
             }
 
             override fun onQueryTextChange(p0: String): Boolean {
+                Log.d("test", p0)
+                filterList = totList.filter {
+                    it.name.contains(p0)
+                } as ArrayList<PhoneNumber>
+                adapter = ListViewAdapter(context, filterList)
+                lv.adapter = adapter
                 return true
             }
         })
 
-        val adapter = ListViewAdapter(context, totList)
-        lv.adapter = adapter
+
     }
 
 //    private fun getPhoneNumbers(): ArrayList<PhoneNumber> {

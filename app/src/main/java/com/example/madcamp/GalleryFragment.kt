@@ -1,6 +1,7 @@
 package com.example.madcamp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.FieldPosition
 
 class GalleryFragment: Fragment() {
     override fun onCreateView(
@@ -35,5 +37,14 @@ class GalleryFragment: Fragment() {
 
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = galleryAdapter
+
+        galleryAdapter.setItemClickListener(object: GalleryAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                Log.d("test", position.toString())
+                val dialog = GalleryPopup(view.context)
+                dialog.showDialog(list[position])
+
+            }
+        })
     }
 }

@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class GalleryAdapter(private val galleryList: ArrayList<GalleryItem>): RecyclerView.Adapter<GalleryAdapter.MyViewHolder>() {
+    private lateinit var itemClickListener : OnItemClickListener
+
     inner class MyViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
         val title: TextView = itemView!!.findViewById(R.id.titleTv)
         fun bind(galleryItem: GalleryItem, position: Int) {
@@ -25,5 +27,17 @@ class GalleryAdapter(private val galleryList: ArrayList<GalleryItem>): RecyclerV
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(galleryList[position], position)
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+
 }
