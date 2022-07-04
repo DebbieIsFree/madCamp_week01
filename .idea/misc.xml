@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/navigation.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/popup.xml" value="0.136" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.37177121771217714" />
         <entry key="app/src/main/res/layout/activity_listviewitem.xml" value="0.13134057971014493" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13071594238281248" />
@@ -12,7 +14,7 @@
         <entry key="app/src/main/res/layout/frag_phone.xml" value="0.2431060791015625" />
         <entry key="app/src/main/res/layout/gallery_item.xml" value="0.21181945800781252" />
         <entry key="app/src/main/res/layout/gallery_popup.xml" value="0.22644927536231885" />
-        <entry key="app/src/main/res/layout/phone_item.xml" value="0.402191162109375" />
+        <entry key="app/src/main/res/layout/phone_item.xml" value="0.39263803680981596" />
       </map>
     </option>
   </component>

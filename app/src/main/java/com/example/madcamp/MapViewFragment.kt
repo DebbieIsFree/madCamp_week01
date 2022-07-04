@@ -2,33 +2,18 @@ package com.example.madcamp
 
 
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
-import android.graphics.Camera
-import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.MainThread
 import androidx.annotation.Nullable
-import androidx.annotation.UiThread
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.CameraUpdateFactory.newLatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
-import com.naver.maps.map.overlay.Align
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.LocationTrackingMode
+import com.naver.maps.map.MapView
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
-import java.util.jar.Manifest
 
 
 private lateinit var mapView: MapView
@@ -66,7 +51,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         mapView = view.findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
-        mapView.getMapAsync(this)
+//        mapView.getMapAsync(this)
 
     }
 

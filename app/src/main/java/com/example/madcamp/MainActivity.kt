@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment1).commit()
 
 
+
+
         tabs.setOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
