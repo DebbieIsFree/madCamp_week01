@@ -99,7 +99,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
                 Log.d("나라", "${addr[0].countryName}")
                 Log.d("주소", "${addr[0].subLocality}")
 
-
+                Toast.makeText(mcontext, "${addr[0].countryName}, ${addr[0].subLocality}", Toast.LENGTH_LONG).show()
             }
     }
 
