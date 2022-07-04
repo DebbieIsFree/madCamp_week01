@@ -109,27 +109,27 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView = view.findViewById(R.id.map_view)
-        mapView.onCreate(savedInstanceState)
+//        mapView.onCreate(savedInstanceState)
         mcontext = context as MainActivity
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+//
+//        naverMap.addOnLocationChangeListener { location ->
+//            Log.d("lat, lon", "${location.latitude}, ${location.longitude}")
+//        }
 
-        naverMap.addOnLocationChangeListener { location ->
-            Log.d("lat, lon", "${location.latitude}, ${location.longitude}")
-        }
 
-
-//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mcontext)
-//        fusedLocationClient.lastLocation
-//            .addOnSuccessListener { location : Location? ->
-//                lat = location!!.latitude
-//                lon = location!!.longitude
-//                Log.d("location", lat.toString())
-//                Log.d("location", lon.toString())
-////                val geocoder  = Geocoder(mcontext, Locale.KOREA)
-////                val address = geocoder.getFromLocation(lat, lon, 1)
-////                Log.d("address", address.toString())
-//            }
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mcontext)
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                lat = location!!.latitude
+                lon = location!!.longitude
+                Log.d("location", lat.toString())
+                Log.d("location", lon.toString())
+//                val geocoder  = Geocoder(mcontext, Locale.KOREA)
+//                val address = geocoder.getFromLocation(lat, lon, 1)
+//                Log.d("address", address.toString())
+            }
 
         val grant = intArrayOf(0)
         onRequestPermissionsResult(100, arrayOf("android.permission.ACCESS_FINE_LOCATION"), grant)
@@ -137,8 +137,8 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
             fusedLocationClient.getLastLocation()
         }
 
-//        mapView.onResume()
-//        mapView.getMapAsync(this)
+        mapView.onResume()
+        mapView.getMapAsync(this)
     }
 
     override fun onStart() {
@@ -209,10 +209,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
 //        }
 //        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 //    }
-//
+
+
     override fun onMapReady(naverMap: NaverMap) {
+        Log.d("ready", "hihihi")
         this.naverMap = naverMap
-        naverMap.locationSource = locationSource
+//        naverMap.locationSource = locationSource
 //        naverMap.locationTrackingMode = LocationTrackingMode.Follow
     }
 
