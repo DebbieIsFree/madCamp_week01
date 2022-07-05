@@ -2,12 +2,14 @@ package com.example.madcamp
 
 
 import android.Manifest
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
 import android.location.*
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,7 +91,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
                 val geocoder  = Geocoder(mcontext, Locale.KOREA)
                 var addr = geocoder.getFromLocation(lat, lon, 1)
 
-                Toast.makeText(mcontext, "좌표 : $lat $lon,\n 주소${addr[0].countryName} ${addr[0].subLocality}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mcontext, "주소${addr[0].countryName} ${addr[0].subLocality}", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -194,7 +196,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
 
             val geocoder  = Geocoder(mcontext, Locale.KOREA)
             var addr = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
-            Toast.makeText(mcontext, "좌표 : ${pointF.x}, ${pointF.y}, ${latLng.latitude}, ${latLng.longitude},\n 주소 : ${addr[0].countryName} ${addr[0].subLocality}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mcontext, "주소 : ${addr[0].countryName} ${addr[0].subLocality}", Toast.LENGTH_SHORT).show()
         }
 
     }
