@@ -27,7 +27,6 @@ import java.util.*
 
 
 class MapViewFragment : Fragment(), OnMapReadyCallback {
-
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
     private lateinit var mapView: MapView

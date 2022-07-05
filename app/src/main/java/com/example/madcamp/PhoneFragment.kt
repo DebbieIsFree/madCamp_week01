@@ -33,6 +33,9 @@ class PhoneFragment: Fragment() {
         val context = context as MainActivity
         val search = context.findViewById(R.id.search) as SearchView
         val lv = context.findViewById(R.id.phoneListView) as ListView
+        val addBtn: View = context.findViewById(R.id.fab)
+
+
         var adapter = ListViewAdapter(context, totList)
         lv.adapter = adapter
 
@@ -52,6 +55,10 @@ class PhoneFragment: Fragment() {
             }
         })
 
+        addBtn.setOnClickListener { view ->
+            val dialog = PhoneAddPopup(view.context)
+            dialog.showDialog(totList, lv)
+        }
 
     }
 
@@ -101,7 +108,7 @@ class PhoneFragment: Fragment() {
             val name = cursor?.getString(1)
             val number = cursor?.getString(2)
 
-            val phone = PhoneNumber(ContextCompat.getDrawable(view.context, R.drawable.img)!!, name!!, number!!)
+            val phone = PhoneNumber(name!!, number!!)
             Log.d("test", "$name $number")
 
             contacts.add(phone)

@@ -14,24 +14,18 @@ class GalleryPopup(context: Context) {
     private val dialog = Dialog(context)
 
     fun showDialog(galleryItem: GalleryItem) {
+        dialog.setContentView(R.layout.gallery_popup2)
+        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCancelable(true)
+        dialog.show()
 
-        MaterialAlertDialogBuilder(context)
-            .setTitle(galleryItem.title)
-            .setBackground(ContextCompat.getDrawable(context, R.drawable.popup)!!)
-            .setNeutralButton("close") {dialog, which -> true}
-            .show()
-//        dialog.setContentView(R.layout.gallery_popup)
-//        dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
-//        dialog.setCanceledOnTouchOutside(true)
-//        dialog.setCancelable(true)
-//        dialog.show()
-//
-//        val title = dialog.findViewById<TextView>(R.id.title_popup)
-//        val closeBtn = dialog.findViewById<Button>(R.id.close_button)
-//        title.text = galleryItem.title
-//        closeBtn.setOnClickListener {
-//            dialog.dismiss()
-//        }
+        val title = dialog.findViewById<TextView>(R.id.title_popup)
+        val closeBtn = dialog.findViewById<Button>(R.id.close_button)
+        title.text = galleryItem.title
+        closeBtn.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
 }

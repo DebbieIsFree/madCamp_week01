@@ -14,10 +14,12 @@ class ListViewAdapter (val context: Context, val phoneList: ArrayList<PhoneNumbe
 
         val name = view.findViewById<TextView>(R.id.nameTv)
         val phone = view.findViewById<TextView>(R.id.phoneTv)
-        val image = view.findViewById<ImageView>(R.id.profileImage)
+        val firstname = view.findViewById<TextView>(R.id.firstName)
+//        val image = view.findViewById<ImageView>(R.id.profileImage)
 
         val info = phoneList[position]
-        image.setImageDrawable(info.img)
+//        image.setImageDrawable(info.img)
+        firstname.text = info.name[0].toString()
         name.text = info.name
         phone.text = info.phone
 
