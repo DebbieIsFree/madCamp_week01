@@ -26,7 +26,7 @@
 - recycleview의 grid layout을 사용하여 커스터마이징하였다.
 - 화면에 추가된 사진을 누르면 해당 사진만 확대하여 보여주는 팝업 기능을 추가하였다.
 
-<img src="https://user-images.githubusercontent.com/83392219/177326069-2825d887-976f-4fa3-8f55-214be9b27daa.jpg" width="100" height="100">
+<img src="https://user-images.githubusercontent.com/83392219/177326069-2825d887-976f-4fa3-8f55-214be9b27daa.jpg" width="500" height="500">
 
 <img src="https://user-images.githubusercontent.com/83392219/177326150-435cb73a-eed7-4b41-ba19-0054198b2de1.jpg" width="50%" height="50%">
 
