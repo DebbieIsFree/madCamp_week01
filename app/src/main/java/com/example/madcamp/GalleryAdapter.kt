@@ -3,6 +3,7 @@ package com.example.madcamp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,7 +12,9 @@ class GalleryAdapter(private val galleryList: ArrayList<GalleryItem>): RecyclerV
 
     inner class MyViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
         val title: TextView = itemView!!.findViewById(R.id.titleTv)
+        val image = itemView!!.findViewById<ImageView>(R.id.galleryImage)
         fun bind(galleryItem: GalleryItem, position: Int) {
+            image.setImageDrawable(galleryItem.img)
             title.text = galleryItem.title
         }
     }

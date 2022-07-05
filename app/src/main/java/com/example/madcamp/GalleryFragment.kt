@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -98,23 +99,28 @@ class GalleryFragment: Fragment() {
 
         if (resultCode == RESULT_OK && requestCode == requestStorage) {
             if(data?.clipData != null) {
+                Log.d("test", "multiple")
                 val count = data.clipData!!.itemCount
                 for (i in 0 until count) {
+                    Log.d("test", "$i")
                     val imageUri = data.clipData!!.getItemAt(i).uri
 
                     imageUri?.let {
                         if(Build.VERSION.SDK_INT < 28) {
+                            Log.d("test", "low ver")
                             val bitmap = MediaStore.Images.Media.getBitmap(
                                 mcontext.contentResolver,
                                 imageUri
                             )
-                            galleryView?.setImageBitmap(bitmap)
+//                            galleryView?.setImageBitmap(bitmap)
                         } else {
+                            Log.d("test", "high ver")
                             val source = ImageDecoder.createSource(mcontext.contentResolver, imageUri)
                             val bitmap = ImageDecoder.decodeBitmap(source)
-                            galleryView?.setImageBitmap(bitmap)
-                            totlist?.plus(
-                                GalleryItem(view?.let { it1 -> ContextCompat.getDrawable(it1.context, R.drawable.img) }!!,"item${i}"),
+//                            galleryView?.setImageBitmap(bitmap)
+                            totlist?.add(
+//                                GalleryItem(view?.let { it1 -> ContextCompat.getDrawable(it1.context, R.drawable.img) }!!,"item${i}"),
+                                GalleryItem(bitmap.toDrawable(resources),"item${i}"),
                             )
                         }
                     }
@@ -123,6 +129,7 @@ class GalleryFragment: Fragment() {
             else {
                 Log.d("test", "only one")
             }
+            galleryAdapter.notifyDataSetChanged()
         }
     }
 
