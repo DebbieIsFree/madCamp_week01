@@ -8,7 +8,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.gms.location.LocationRequest
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +23,6 @@ class MainActivity : AppCompatActivity() {
         var fragment3 = MapViewFragment()
 
         val  tabs = findViewById<TabLayout>(R.id.tabs)
-//        tabs.addTab(tabs.newTab().setText("Phone"))
-//        tabs.addTab(tabs.newTab().setText("Gallery"))
-//        tabs.addTab(tabs.newTab().setText("Map"))
 
         tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_baseline_phone_enabled_24))
         tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_baseline_image_24))
@@ -80,9 +76,7 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d("test", "permission granted")
         } else {
-            Log.d("test", "permission denied")
         }
     }
 }

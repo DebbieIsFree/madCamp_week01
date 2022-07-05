@@ -26,7 +26,6 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import java.lang.Float.parseFloat
 import java.util.*
 
 
@@ -48,19 +47,11 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 
-//    private val locationRequest: LocationRequest? = null
-
-
-//    private val permissions = arrayOf(
-//        Manifest.permission.ACCESS_FINE_LOCATION,
-//        Manifest.permission.ACCESS_COARSE_LOCATION
-//    )
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mcontext = context as MainActivity
     }
-//
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationClient =
@@ -114,15 +105,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView = view.findViewById(R.id.map_view)
-//        mapView.onCreate(savedInstanceState)
         mcontext = context as MainActivity
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-//
-//        naverMap.addOnLocationChangeListener { location ->
-//            Log.d("lat, lon", "${location.latitude}, ${location.longitude}")
-//        }
-
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mcontext)
         fusedLocationClient.lastLocation
@@ -131,9 +116,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
                 lon = location!!.longitude
                 Log.d("location", lat.toString())
                 Log.d("location", lon.toString())
-//                val geocoder  = Geocoder(mcontext, Locale.KOREA)
-//                val address = geocoder.getFromLocation(lat, lon, 1)
-//                Log.d("address", address.toString())
             }
 
         val grant = intArrayOf(0)
@@ -187,34 +169,13 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         grantResults: IntArray
     ) {
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
-            if (!locationSource.isActivated) { // 권한 거부됨
+            if (!locationSource.isActivated) {
                 naverMap.locationTrackingMode = LocationTrackingMode.None
             }
             return
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
-
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String>,
-//        grantResults: IntArray
-//    ) {
-//
-//        if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults))
-//        {
-//            if (!locationSource.isActivated) { // 권한 거부됨
-//                neverMap.locationTrackingMode = LocationTrackingMode.None
-//                return
-//            }
-//            else{
-//                neverMap.locationTrackingMode = LocationTrackingMode.Follow
-//            }
-//        }
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//    }
-
 
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ready", "hihihi")
@@ -227,15 +188,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         marker.icon = OverlayImage.fromResource(R.drawable.ic_baseline_place_24)
         marker.map = naverMap
 
-
-//        naverMap.addOnLocationChangeListener { location ->
-//            Toast.makeText(mcontext, "${location.latitude}, ${location.longitude}",
-//                Toast.LENGTH_LONG).show()
-//        }
-
-
         naverMap.setOnMapClickListener { pointF, latLng ->
-//            Toast.makeText(mcontext, "${pointF.x}, ${pointF.y}, ${latLng.latitude}, ${latLng.longitude}", Toast.LENGTH_SHORT).show()
             Log.d("Click Location : ", "${LatLng.MAXIMUM_LATITUDE}, ${LatLng.MAXIMUM_LONGITUDE}")
             marker.position = LatLng(latLng.latitude, latLng.longitude)
 

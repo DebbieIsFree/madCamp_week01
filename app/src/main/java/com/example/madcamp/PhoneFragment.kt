@@ -3,17 +3,17 @@ package com.example.madcamp
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 
 class PhoneFragment: Fragment() {
+    var totList: ArrayList<PhoneNumber> = arrayListOf()
+    var filterList: ArrayList<PhoneNumber> = arrayListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_phone, container, false)
@@ -22,12 +22,11 @@ class PhoneFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var totList = arrayListOf<PhoneNumber>()
-        var filterList = arrayListOf<PhoneNumber>()
         val grant = intArrayOf(0)
         onRequestPermissionsResult(100, arrayOf("android.permission.READ_CONTACTS"), grant)
         if(grant[0] == PackageManager.PERMISSION_GRANTED) {
             totList = getContacts(view)
+            filterList = getContacts(view)
         }
 
         val context = context as MainActivity
@@ -35,8 +34,7 @@ class PhoneFragment: Fragment() {
         val lv = context.findViewById(R.id.phoneListView) as ListView
         val addBtn: View = context.findViewById(R.id.fab)
 
-
-        var adapter = ListViewAdapter(context, totList)
+        var adapter = ListViewAdapter(context, filterList)
         lv.adapter = adapter
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -45,7 +43,6 @@ class PhoneFragment: Fragment() {
             }
 
             override fun onQueryTextChange(p0: String): Boolean {
-                Log.d("test", p0)
                 filterList = totList.filter {
                     it.name.contains(p0)
                 } as ArrayList<PhoneNumber>
@@ -61,29 +58,6 @@ class PhoneFragment: Fragment() {
         }
 
     }
-
-//    private fun getPhoneNumbers(): ArrayList<PhoneNumber> {
-//        val assetManager = resources.assets
-//        val inputStream = assetManager.open("data.json")
-//        val jsonString = inputStream.reader().readText()
-//        val jsonArray = JSONArray(jsonString)
-//
-//        var phoneNumbers = arrayListOf<PhoneNumber>()
-//
-//        for (index in 0 until jsonArray.length()){
-//            val jsonObject = jsonArray.getJSONObject(index)
-//
-//            val name = jsonObject.getString("name")
-//            val phone = jsonObject.getString("phone")
-//
-////            Log.d("jsonObject", jsonObject.toString())
-////            Log.d("json_name_phone", "$name $phone")
-//
-//            phoneNumbers.add(PhoneNumber(name, phone))
-//        }
-//
-//        return phoneNumbers
-//    }
 
     fun getContacts(view: View): ArrayList<PhoneNumber> {
         val proj = arrayOf(
@@ -109,7 +83,6 @@ class PhoneFragment: Fragment() {
             val number = cursor?.getString(2)
 
             val phone = PhoneNumber(name!!, number!!)
-            Log.d("test", "$name $number")
 
             contacts.add(phone)
         }

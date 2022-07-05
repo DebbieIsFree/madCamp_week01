@@ -4,9 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import android.widget.ImageView
 
 class GalleryPopup(context: Context) {
     val context = context
@@ -20,12 +18,8 @@ class GalleryPopup(context: Context) {
         dialog.setCancelable(true)
         dialog.show()
 
-        val title = dialog.findViewById<TextView>(R.id.title_popup)
-        val closeBtn = dialog.findViewById<Button>(R.id.close_button)
-        title.text = galleryItem.title
-        closeBtn.setOnClickListener {
-            dialog.dismiss()
-        }
+        val image = dialog.findViewById<ImageView>(R.id.popup_image)
+        image.setImageDrawable(galleryItem.img)
     }
 
 }

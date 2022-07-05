@@ -2,7 +2,6 @@ package com.example.madcamp
 
 import android.app.Dialog
 import android.content.Context
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ListView
