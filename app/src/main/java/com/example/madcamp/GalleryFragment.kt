@@ -42,11 +42,6 @@ class GalleryFragment: Fragment() {
     private val permissionAlbum = 100
     private val permissionCamera = 200
     private val requestStorage = 300
-    private val requestCamera = 400
-    private val requestCancled = 500
-
-    var realUri : Uri? = null
-//    var cr : ContentResolver = mcontext.contentResolver
 
 
 
@@ -87,7 +82,6 @@ class GalleryFragment: Fragment() {
 
     fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
-//        intent.type = MediaStore.Images.Media.CONTENT_TYPE
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.action = Intent.ACTION_GET_CONTENT
@@ -112,14 +106,11 @@ class GalleryFragment: Fragment() {
                                 mcontext.contentResolver,
                                 imageUri
                             )
-//                            galleryView?.setImageBitmap(bitmap)
                         } else {
                             Log.d("test", "high ver")
                             val source = ImageDecoder.createSource(mcontext.contentResolver, imageUri)
                             val bitmap = ImageDecoder.decodeBitmap(source)
-//                            galleryView?.setImageBitmap(bitmap)
                             totlist?.add(
-//                                GalleryItem(view?.let { it1 -> ContextCompat.getDrawable(it1.context, R.drawable.img) }!!,"item${i}"),
                                 GalleryItem(bitmap.toDrawable(resources),"item${i}"),
                             )
                         }
@@ -128,44 +119,27 @@ class GalleryFragment: Fragment() {
             }
             else {
                 Log.d("test", "only one")
+
+                data?.data?.let {
+                    if(Build.VERSION.SDK_INT < 28) {
+                        Log.d("test", "low ver")
+                        val bitmap = MediaStore.Images.Media.getBitmap(
+                            mcontext.contentResolver,
+                            it
+                        )
+                    } else {
+                        Log.d("test", "high ver")
+                        val source = ImageDecoder.createSource(mcontext.contentResolver, it)
+                        val bitmap = ImageDecoder.decodeBitmap(source)
+                        totlist?.add(
+                            GalleryItem(bitmap.toDrawable(resources),"onlyone"),
+                        )
+                    }
+                }
             }
             galleryAdapter.notifyDataSetChanged()
         }
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        if(requestCode == requestStorage) {
-//            if(resultCode == RESULT_OK) {
-//                var currentImageUri = data!!.data
-//
-//                try{
-//                    currentImageUri?.let {
-//                        if(Build.VERSION.SDK_INT < 28) {
-//                            val bitmap = MediaStore.Images.Media.getBitmap(
-//                                mcontext.contentResolver,
-//                                currentImageUri
-//                            )
-//                            galleryView?.setImageBitmap(bitmap)
-//                        } else {
-//                            val source = ImageDecoder.createSource(mcontext.contentResolver, currentImageUri)
-//                            val bitmap = ImageDecoder.decodeBitmap(source)
-//                            galleryView?.setImageBitmap(bitmap)
-//                            totlist?.plus(
-//                                GalleryItem(view?.let { it1 -> ContextCompat.getDrawable(it1.context, R.drawable.img) }!!,"item${count++}"),
-//                            )
-//                        }
-//                    }
-//                }catch(e : IOException)
-//                {
-//                    e.printStackTrace()
-//                }
-//            }
-//            else if(resultCode == requestCancled)
-//            {
-//                Toast.makeText(mcontext, "사진 선택 취소", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
 
 
     override fun onAttach(context: Context) {
@@ -186,13 +160,14 @@ class GalleryFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), permissionAlbum)
 
-        var galleryBtn = view?.findViewById<Button>(R.id.galleryBtn)
+        var galleryBtn: View = view?.findViewById(R.id.open)
+        val refreshBtn: View = view?.findViewById(R.id.refresh)
         galleryBtn?.setOnClickListener{
             openGallery()
         }
-
-        galleryCloseBtn?.setOnClickListener{
-
+        refreshBtn?.setOnClickListener{
+            totlist!!.clear()
+            galleryAdapter.notifyDataSetChanged()
         }
 
         galleryAdapter = GalleryAdapter(totlist!!)
@@ -200,17 +175,14 @@ class GalleryFragment: Fragment() {
 
         recyclerView.layoutManager = GridLayoutManager(activity, 3)
         recyclerView.adapter = galleryAdapter
+        galleryAdapter.setItemClickListener(object: GalleryAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                Log.d("test", position.toString())
+                val dialog = GalleryPopup(view.context)
+                dialog.showDialog(totlist!![position])
+            }
+        })
 
-//        if (galleryAdapter != null) {
-//            galleryAdapter.setItemClickListener(object: GalleryAdapter.OnItemClickListener {
-//                override fun onClick(v: View, position: Int) {
-//                    Log.d("test", position.toString())
-//    //
-//                    val dialog = GalleryPopup(view.context)
-//                    dialog.showDialog(totlist!![position])
-//                }
-//            })
-//        }
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
