@@ -3,7 +3,6 @@ package com.example.madcamp
 import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.ImageView
 
 class GalleryPopup(context: Context) {

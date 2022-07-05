@@ -74,7 +74,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         ) {
             return
         }
-//
+
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, object : CancellationToken() {
             override fun onCanceledRequested(p0: OnTokenCanceledListener) = CancellationTokenSource().token
 
@@ -86,7 +86,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
                 else {
                     lat = location.latitude
                     lon = location.longitude
-                    Log.d("location : ", "${lat}, $lon")
                 }
                 val geocoder  = Geocoder(mcontext, Locale.KOREA)
                 var addr = geocoder.getFromLocation(lat, lon, 1)
@@ -116,8 +115,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
             .addOnSuccessListener { location : Location? ->
                 lat = location!!.latitude
                 lon = location!!.longitude
-                Log.d("location", lat.toString())
-                Log.d("location", lon.toString())
             }
 
         val grant = intArrayOf(0)
@@ -180,7 +177,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-        Log.d("ready", "hihihi")
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
@@ -191,7 +187,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         marker.map = naverMap
 
         naverMap.setOnMapClickListener { pointF, latLng ->
-            Log.d("Click Location : ", "${LatLng.MAXIMUM_LATITUDE}, ${LatLng.MAXIMUM_LONGITUDE}")
             marker.position = LatLng(latLng.latitude, latLng.longitude)
 
             val geocoder  = Geocoder(mcontext, Locale.KOREA)
