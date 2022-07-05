@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         var fragment3 = MapViewFragment()
 
         val  tabs = findViewById<TabLayout>(R.id.tabs)
-        tabs.addTab(tabs.newTab().setText("Phone"))
+//        tabs.addTab(tabs.newTab().setText("Phone"))
         tabs.addTab(tabs.newTab().setText("Gallery"))
         tabs.addTab(tabs.newTab().setText("Map"))
 

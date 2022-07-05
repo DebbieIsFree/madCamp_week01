@@ -89,20 +89,16 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
         })
             .addOnSuccessListener { location: Location? ->
                 if (location == null)
-                    Log.d("Failed","Cannot_get_location")
+                    Toast.makeText(mcontext, "Failed! Cannot_get_location", Toast.LENGTH_SHORT).show()
                 else {
                     lat = location.latitude
                     lon = location.longitude
                     Log.d("location : ", "${lat}, $lon")
                 }
-
                 val geocoder  = Geocoder(mcontext, Locale.KOREA)
                 var addr = geocoder.getFromLocation(lat, lon, 1)
 
-                Log.d("나라", "${addr[0].countryName}")
-                Log.d("주소", "${addr[0].subLocality}")
-
-                Toast.makeText(mcontext, "${addr[0].countryName}, ${addr[0].subLocality}", Toast.LENGTH_LONG).show()
+                Toast.makeText(mcontext, "좌표 : $lat $lon,\n 주소${addr[0].countryName} ${addr[0].subLocality}", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -239,53 +235,15 @@ class MapViewFragment : Fragment(), OnMapReadyCallback {
 
 
         naverMap.setOnMapClickListener { pointF, latLng ->
-            naverMap.addOnLocationChangeListener { location ->
-                Toast.makeText(mcontext, "${location.latitude}, ${location.longitude}",
-                    Toast.LENGTH_SHORT).show()
-                Log.d("Click Location : ", "${LatLng.MAXIMUM_LATITUDE}, ${LatLng.MAXIMUM_LONGITUDE}")
-                marker.position = LatLng(LatLng.MAXIMUM_LATITUDE, LatLng.MAXIMUM_LONGITUDE)
-            }
-//            Log.d("Click Location : ", "${LatLng.MAXIMUM_LATITUDE}, ${LatLng.MAXIMUM_LONGITUDE}")
-//            marker.position = LatLng(LatLng.MAXIMUM_LATITUDE, LatLng.MAXIMUM_LONGITUDE)
+//            Toast.makeText(mcontext, "${pointF.x}, ${pointF.y}, ${latLng.latitude}, ${latLng.longitude}", Toast.LENGTH_SHORT).show()
+            Log.d("Click Location : ", "${LatLng.MAXIMUM_LATITUDE}, ${LatLng.MAXIMUM_LONGITUDE}")
+            marker.position = LatLng(latLng.latitude, latLng.longitude)
+
+            val geocoder  = Geocoder(mcontext, Locale.KOREA)
+            var addr = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            Toast.makeText(mcontext, "좌표 : ${pointF.x}, ${pointF.y}, ${latLng.latitude}, ${latLng.longitude},\n 주소 : ${addr[0].countryName} ${addr[0].subLocality}", Toast.LENGTH_SHORT).show()
         }
-//
-//        function initGeocoder() {
-//            var latlng = map.getCenter();
-//            var utmk = naver.maps.TransCoord.fromLatLngToUTMK(latlng); // 위/경도 -> UTMK
-//            var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
-//            var naverCoord = naver.maps.TransCoord.fromTM128ToNaver(tm128); // TM128 -> NAVER
-//
-//            infoWindow = new naver.maps.InfoWindow({
-//                    content: ''
-//            });
-//
-//            naverMap.addListener('click', function(e) {
-//                var latlng = e.coord,
-//                var utmk = naver.maps.TransCoord.fromLatLngToUTMK(latlng),
-//                var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk),
-//                var naverCoord = naver.maps.TransCoord.fromTM128ToNaver(tm128)
-//
-//                utmk.x = parseFloat(utmk.x.toFixed(1))
-//                utmk.y = parseFloat(utmk.y.toFixed(1))
-//
-//                infoWindow.setContent([
-//                    '<div style="padding:10px;width:380px;font-size:14px;line-height:20px;">',
-//                    '<strong>LatLng</strong> : '+ '좌 클릭 지점 위/경도 좌표' +'<br />',
-//                    '<strong>UTMK</strong> : '+ '위/경도 좌표를 UTMK 좌표로 변환한 값' +'<br />',
-//                    '<strong>TM128</strong> : '+ '변환된 UTMK 좌표를 TM128 좌표로 변환한 값' +'<br />',
-//                    '<strong>NAVER</strong> : '+ '변환된 TM128 좌표를 NAVER 좌표로 변환한 값' +'<br />',
-//                    '</div>'
-//                ].join(''));
-//
-//                infoWindow.open(naverMap, latlng)
-//                Log.d('LatLng: ' , "latlng.toString()")
-//                Log.d('UTMK: ' , "utmk.toString()")
-//                Log.d('TM128: ' , "tm128.toString()")
-//                Log.d('NAVER: ', "naverCoord.toString()")
-//            });
-//        }
-//
-//        naver.maps.onJSContentLoaded = initGeocoder
+
     }
 }
 

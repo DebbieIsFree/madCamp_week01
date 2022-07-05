@@ -3,22 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/navigation.xml" value="0.136" />
-        <entry key="app/src/main/res/drawable/popup.xml" value="0.136" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/drawable/ic_baseline_place_24.xml" value="0.289" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/drawable/navigation.xml" value="0.2085" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/drawable/te_background.xml" value="0.179" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/activity_main.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/dialog.xml" value="0.15539858728557013" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/frag_gallery.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/gallery_item.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/gallery_popup.xml" value="0.25" />
+        <entry key="..\:/Users/wldnj/AndroidStudioProjects/madCamp/app/src/main/res/layout/phone_item.xml" value="0.2866847826086957" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.37177121771217714" />
         <entry key="app/src/main/res/layout/activity_listviewitem.xml" value="0.13134057971014493" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13071594238281248" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20623376818670744" />
-        <entry key="app/src/main/res/layout/dialog.xml" value="0.2346014492753623" />
-        <entry key="app/src/main/res/layout/frag_gallery.xml" value="0.2186004638671875" />
+        <entry key="app/src/main/res/layout/frag_gallery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/frag_map.xml" value="0.13134057971014493" />
-        <entry key="app/src/main/res/layout/frag_phone.xml" value="0.23189392089843752" />
+        <entry key="app/src/main/res/layout/frag_phone.xml" value="0.2431060791015625" />
         <entry key="app/src/main/res/layout/gallery_item.xml" value="0.21181945800781252" />
-        <entry key="app/src/main/res/layout/gallery_item2.xml" value="0.2513641357421875" />
         <entry key="app/src/main/res/layout/gallery_popup.xml" value="0.22644927536231885" />
-        <entry key="app/src/main/res/layout/gallery_popup2.xml" value="0.22846984863281253" />
-        <entry key="app/src/main/res/layout/phone_add_popup.xml" value="0.2304764015087183" />
-        <entry key="app/src/main/res/layout/phone_item.xml" value="0.43265533447265625" />
+        <entry key="app/src/main/res/layout/phone_item.xml" value="0.402191162109375" />
       </map>
     </option>
   </component>
