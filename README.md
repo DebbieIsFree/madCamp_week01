@@ -8,10 +8,12 @@
 - **API** : 33
 
 ### **Overview**
+- Fragment, Adapter, Permission(전화, 갤러리, 지도), Event Listener, 
 - Contact, Gallery, Map 기능을 가진 3개의 탭으로 구성된 안드로이드 어플리케이션이다.   
 - 각각의 탭은 Fragment로 구현하였으며, tablayout을 이용하여 탭 간 전환을 구현하였다.
 
 ### **TAB 1: Contact**
+- 처음에는 Asset 폴더에 json file을 만들어서 불러오는 방식이었지만 나중에 연락처 연동 방식으로 수정했다.
 - 휴대전화의 연락처와 연동하여 이름과 전화번호를 보여주는 탭이다.
 - listview를 기반으로 adapter를 통해 customize하였다.
 - 상단의 검색바는 이름을 기준으로 해당하는 연락처를 필터링해준다.
