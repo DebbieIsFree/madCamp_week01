@@ -4,7 +4,8 @@
 
 ### **Enviorment**
 - **Language**: Kotlin
-- **program** : Android Studio (API 33)
+- **program** : Android Studio VERSION 11 
+- **API** : 33
 
 ### **Overview**
 - Contact, Gallery, Map 기능을 가진 3개의 탭으로 구성된 안드로이드 어플리케이션이다.   
