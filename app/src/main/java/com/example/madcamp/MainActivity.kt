@@ -25,12 +25,14 @@ class MainActivity : AppCompatActivity() {
 
         val  tabs = findViewById<TabLayout>(R.id.tabs)
 //        tabs.addTab(tabs.newTab().setText("Phone"))
-        tabs.addTab(tabs.newTab().setText("Gallery"))
-        tabs.addTab(tabs.newTab().setText("Map"))
+//        tabs.addTab(tabs.newTab().setText("Gallery"))
+//        tabs.addTab(tabs.newTab().setText("Map"))
+
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_baseline_phone_enabled_24))
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_baseline_image_24))
+        tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_baseline_pin_drop_24))
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment1).commit()
-
-
 
 
         tabs.setOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
